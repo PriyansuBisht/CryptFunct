@@ -1,0 +1,210 @@
+Cypher : Encripting and Decripting Algorithm
+Symmetric Cypher : CT depends on key and mesage onle using a fixed meathod no  randomness
+Encryption : FXN(Message , Key) --> {CypherText}
+Decryption : fxn(CypherText , Key) --> {Message}
+
+Perfect Secrecy :  Probablity that a given CT belongs to message M0 || M1 || M2 || ---- || Mn is same
+	  	-> Probablity (P) => P(CT, M0) == P(CT , M1) == P(CT , M2) and so on 		{for every M0,M1,--- Є M}
+	  	-> Whlie Decrypting it can't be told to which M does a CT Belong due to same P
+	  	-> No CT only attack
+		-> Length of K >= Length of M
+
+Discrete Probablity :
+
+
+Cyphers {Begining Phase / History}
+
+-> Substution Cypher
+	Message(M) : text {a,b,c,---,z,A,B,---,Z,1,2,3,---,n}	{i.e. Message taken a letter at a time}
+	Key(K) : Numerics with Key space 26! {1,2,3,---,n}	{i.e. Any number}
+		 -> Each key can be represented by 88 bits
+	
+	CypherText(CT) : Encripted message { CT = E(M + K) }
+	Encryption Algo(E) : M + K	{i.e. CypherText(CT) = M forward shift by key,
+									if K = 2 , M = abcjkl
+									then,
+									E( M , K ) = CT
+									CT = (a+2)(b+2)(c+2)(j+2)(k+2)(l+2)
+									CT = (c)(d)(e)(l)(m)(n)
+									CT = cdelmn
+	Decryption Algo(D) : CT - K 	{i.e. Message(M) = CT Back shift by key,
+									known L = 2 , C = cdelmn
+									then,
+									D( CT , K ) = M
+									M = (c-2)(d-2)(e-2)(l-2)(m-2)(n-2)
+									M = (a)(b)(c)(j)(k)(l)
+									M = abcjkl
+	
+
+	Breaking the Cypher : Letter Frequencies
+				-> Most user char in English, 'e' (12.7%)
+				-> Most common letter in CypherText is likely be the substution for 'e'
+				-> Next, letter is 't' which appears (9.1%)
+				-> 2nd Most common letter in CypherText is likely be the substution for 't'
+				-> Next, letter is 'a' which appears (8.1%)
+				-> 3rd Most common letter in CypherText is likely be the substution for 'a'
+				-> Next Use pair of letters
+				-> Most common : "he" , "an" , "th" , "in"
+				-> Most common pair in CypherText is likely be a substuite for one of the 4 above 
+				-> Complete key table can be identified like this by hit-n-trail
+			      
+				Vulnerable to worst type of attack, called CpherText Only Attack {i.e. key and message only needs CT to crack}
+
+
+	Example : Ceaser Cypher {No Key}
+		  -> Every char in message forward shift by 3
+
+	NOTE : After a cycle {i.e. when (M + K) reaches 'z'}, shift starts from 'a'.	{ Like, M = 'x' , K = 6, 
+											  then CT = x->y->z-> a ->b->c->d
+											  CT = 'd'
+											}
+
+
+->  
+-> Roater Machine
+->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+->	OTP (One Time PAD)
+	Message(M) : text {a,b,c,---,z,A,B,---,Z,1,2,3,---,n} in Binary form	{i.e. Binary Representation of Message at a time}
+	Key(K) : Random bit string as long as message	{k : (0,1)^n}
+		 Random Key
+	CypherText(CT) : Encripted message { CT = E(M + K) }
+	Encryption Algo(E) : M XOR K	{i.e. CypherText(CT) = M XOR add with key,
+									if K = 101010010010 , M = 010011101011
+									then,
+									E( M , K ) = CT
+									CT =      010011101011	{Message}
+									     XOR  101010010010	{Key}
+										----------------
+									CT =	  111001111001	{CypherText}
+									
+	Decryption Algo(D) : CT XOR K 	{i.e. Message(M) = CT XOR add with key,
+									known L = 2 , C = cdelmn
+									then,
+									D( CT , K ) = M
+									M =       111001111001	{CypherText}
+									     XOR  101010010010	{Key}
+										----------------
+									M =	  010011101011	{Message}
+
+	
+	NOTE :	OTP has Perfect Secracy
+		Problem : too long Key Required
+	
+	
+
+
+
+->	String Cypher (Making OTP practical)
+
+	Message(M) : text {a,b,c,---,z,A,B,---,Z,1,2,3,---,n} in Binary form	{i.e. Binary Representation of Message at a time}
+	Key(K) : PseudoRandom bit string as long as message	{k : (0,1)^n}
+		 Key is PseudoRandom
+
+	CypherText(CT) : Encrypted message { CT = E(M + K) }
+	Encryption Algo(E) : M XOR K	{i.e. CypherText(CT) = M XOR add with key,
+									if K = 101010010010 , M = 010011101011
+									then,
+									E( M , K ) = CT
+									CT =      010011101011	{Message}
+									     XOR  101010010010	{Key}
+										----------------
+									CT =	  111001111001	{CypherText}
+									
+	Decryption Algo(D) : CT XOR K 	{i.e. Message(M) = CT XOR add with key,
+									known L = 2 , C = cdelmn
+									then,
+									D( CT , K ) = M
+									M =       111001111001	{CypherText}
+									     XOR  101010010010	{Key}
+										----------------
+									M =	  010011101011	{Message}
+
+	
+	NOTE :	OTP has Perfect Secracy
+		Problem : too long Key Required
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
